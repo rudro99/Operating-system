@@ -20,7 +20,7 @@ int main()
     {
         for(j=0; j<m; j++)
         {
-            need[i][j] = max[i][j] - alloc[i][j];    //calculating need matrix
+            need[i][j] = max[i][j] - alloc[i][j];
             printf("%d ", need[i][j]);
         }
         printf("\n");
@@ -30,37 +30,37 @@ int main()
         scanf("%d", &avail[i]);
     for(i=0; i<n; i++)
     {
-        p[i] = i+1;             //contains process number
-        safe[i] = 0;           //initializing all process as unsafe
+        p[i] = i+1;
+        safe[i] = 0;
     }
-    cnt = 0;                    //counting safe processes
+    cnt = 0;
     for(k=0; k<n; k++)
     {
         for(i=0; i<n; i++)
         {
-            if(safe[i] == 0)        //checking only for unsafe process
+            if(safe[i] == 0)
             {
-                ok = 1;             //assuming the process would be okay
+                ok = 1;
                 for(j=0; j<m; j++)
                 {
-                    if(need[i][j] > avail[j])       //the process needs more instances than available
+                    if(need[i][j] > avail[j])
                     {
-                        ok = 0;                     //this process is not okay yet, so break
+                        ok = 0;
                         break;
                     }
                 }
-                if(ok == 1)                         //if the process is okay
+                if(ok == 1)
                 {
-                    ans[cnt] = p[i];                //storing the process number in ans list
-                    safe[i] = 1;                    //saying this is safe
-                    cnt++;                          //number of safe process increased
+                    ans[cnt] = p[i];
+                    safe[i] = 1;
+                    cnt++;
                     for(j=0; j<m; j++)
-                        avail[j] += alloc[i][j];    //increasing available instances, as this process don't need any
+                        avail[j] += alloc[i][j];
                 }
             }
         }
     }
-    if(cnt == n)                //if all the processes are safe
+    if(cnt == n)
     {
         printf("Safe sequence: ");
         for(i=0; i<n; i++)
