@@ -22,74 +22,73 @@ int main()
     {
         scanf("%d",&pr[i]);
     }
-    for(i=0; i<n; i++)              //Bubble sort
+    for(i=0; i<n; i++)
     {
         for(j=0; j<n-1; j++)
         {
-            if(at[j] > at[j+1] || (at[j]==at[j+1] && pr[j]>pr[j+1]))        //smaller arrival time are in front
-            {                                                              //and when arrival time is same, small priority is in front
+            if(at[j] > at[j+1] || (at[j]==at[j+1] && pr[j]>pr[j+1]))
+            {
                 temp = at[j];
                 at[j] = at[j+1];
-                at[j+1] = temp;         //swap arrival time
-
+                at[j+1] = temp;
                 temp = bt[j];
                 bt[j] = bt[j+1];
-                bt[j+1] = temp;         //swap burst time
+                bt[j+1] = temp;
 
                 temp = pr[j];
                 pr[j] = pr[j+1];
-                pr[j+1] = temp;        //swap priority
+                pr[j+1] = temp;
 
                 temp = p[j];
                 p[j] = p[j+1];
-                p[j+1] = temp;          //swap process id
+                p[j+1] = temp;
             }
         }
     }
 
-    next=0;                 //next process to allocate
-    time = at[0];               //current time
+    next=0;
+    time = at[0];
     for(i=0; i<n; i++)
     {
-        time += bt[i];              //time increases as burst time is given
-        next++;                         //work with next process
-        min = pr[next];                        //suppose next process has the minimum burst time
+        time += bt[i];
+        next++;
+        min = pr[next];
         id = next;
         for(j=next; j<n; j++)
         {
-            if(at[j] <= time && pr[j] < min)            //if process arrived in current time and has smaller burst time than minimum
-            {                                          //bring that process in the next position
-                min = pr[j];         // update min
-                id = j;             // store this process's position in id
+            if(at[j] <= time && pr[j] < min)
+            {
+                min = pr[j];
+                id = j;
             }
         }
 
         temp = at[next];
         at[next] = at[id];
-        at[id] = temp;               //swap arrival time
+        at[id] = temp;
 
         temp = bt[next];
         bt[next] = bt[id];
-        bt[id] = temp;               //swap burst time
+        bt[id] = temp;
 
         temp = pr[next];
         pr[next] = pr[id];
-        pr[id] = temp;               //swap priority
+        pr[id] = temp;
 
         temp = p[next];
         p[next] = p[id];
-        p[id] = temp;                //swap process id
+        p[id] = temp;
     }
 
     wt[0] = 0;
     tat[0] = wt[0] + bt[0];
-    ct[0] = at[0] + bt[0];                  //completion time of first process is its burst time
+    ct[0] = at[0] + bt[0];
     tatavg = bt[0];
     for(i=1; i<n; i++)
     {
-        wt[i] = ct[i-1] - at[i];                //waiting time is completion time of the previous process minus its arrival time
-        tat[i] = wt[i] + bt[i];                     //turnaround time is waiting time plus burst time
-        ct[i] = ct[i-1] + bt[i];                //completion time is completion time of previous process plus its burst time
+        wt[i] = ct[i-1] - at[i];
+        tat[i] = wt[i] + bt[i];
+        ct[i] = ct[i-1] + bt[i];
         wtavg = wtavg + wt[i];
         tatavg = tatavg + tat[i];
     }

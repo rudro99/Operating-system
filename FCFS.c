@@ -17,35 +17,35 @@ int main()
         scanf("%d",&bt[i]);
         p[i] = i+1;
     }
-    for(i=0; i<n; i++)              //Bubble sort
+    for(i=0; i<n; i++)
     {
         for(j=0; j<n-1; j++)
         {
-            if(at[j] > at[j+1])         //sorting according to arrival time in ascending order
+            if(at[j] > at[j+1])
             {
                 temp = at[j];
                 at[j] = at[j+1];
-                at[j+1] = temp;         //swap arrival time
+                at[j+1] = temp;
 
                 temp = bt[j];
                 bt[j] = bt[j+1];
-                bt[j+1] = temp;         //swap burst time
+                bt[j+1] = temp;
 
                 temp = p[j];
                 p[j] = p[j+1];
-                p[j+1] = temp;          //swap process id
+                p[j+1] = temp;
             }
         }
     }
     wt[0] = 0;
     tat[0] = wt[0] + bt[0];
-    ct[0] = at[0] + bt[0];              //completion time of first process is its burst time
+    ct[0] = at[0] + bt[0];
     tatavg = bt[0];
     for(i=1; i<n; i++)
     {
-        wt[i] = ct[i-1] - at[i];        //waiting time is completion time of the previous process minus its arrival time
-        tat[i] = wt[i] + bt[i];             //turnaround time is waiting time plus burst time
-        ct[i] = ct[i-1] + bt[i];        //completion time is completion time of previous process plus its burst time
+        wt[i] = ct[i-1] - at[i];
+        tat[i] = wt[i] + bt[i];
+        ct[i] = ct[i-1] + bt[i];
         wtavg = wtavg + wt[i];
         tatavg = tatavg + tat[i];
     }
